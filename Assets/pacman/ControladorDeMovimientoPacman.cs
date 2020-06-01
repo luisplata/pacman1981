@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ControladorDeMovimientoPacman : MonoBehaviour
 {
@@ -14,6 +11,7 @@ public class ControladorDeMovimientoPacman : MonoBehaviour
      * clyde va a la izquierda (-1,0)
      */
     public GameObject blink, pinky, inky, clyde;
+    public int powerup;
 
     // Update is called once per frame
     void Update()
@@ -132,9 +130,9 @@ public class ControladorDeMovimientoPacman : MonoBehaviour
         //vamos a utilizar el raycast para eso
         Debug.DrawRay(transform.position, vector*0.7f);
         RaycastHit2D hit = Physics2D.Raycast(this.transform.position, vector,(vector.magnitude*0.7f));
-        if(hit.collider == null)
+        if(hit.collider == null || hit.collider.transform.CompareTag("comida") || hit.collider.transform.CompareTag("powerup"))
         {
-            GetComponent<Rigidbody2D>().velocity = vector * speed;
+            GetComponent<Rigidbody2D>().velocity = vector * (speed + powerup);
             ultimaDesicion = vector;
         }
     }
