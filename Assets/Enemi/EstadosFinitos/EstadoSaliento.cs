@@ -9,6 +9,7 @@ public class EstadoSaliento : EstadosFinitos
     {
         //cuando salga del estado vuelve a tener la colision para que no entre de nuevo por accidente
         Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), GameObject.Find("spawner_up").GetComponent<Collider2D>(), false);
+        gameObject.GetComponent<Collider2D>().isTrigger = false;
     }
 
     public override void Start()
@@ -16,6 +17,8 @@ public class EstadoSaliento : EstadosFinitos
         Debug.Log("Esta saliendo");
         base.Start();
         Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), GameObject.Find("spawner_up").GetComponent<Collider2D>());
+        //vamos a probar con colocarle en triger el colisionador para que no entre con pacman
+        gameObject.GetComponent<Collider2D>().isTrigger = true;
     }
 
     public override Type VerficarTransiciones()

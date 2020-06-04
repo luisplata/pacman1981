@@ -6370,6 +6370,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8147191714850840681, guid: 201041a6bedf3cf47830adf332963ab5,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.57243615
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147191714850840681, guid: 201041a6bedf3cf47830adf332963ab5,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.18396229
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147191714850840681, guid: 201041a6bedf3cf47830adf332963ab5,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8147191714850840683, guid: 201041a6bedf3cf47830adf332963ab5,
         type: 3}
       propertyPath: m_Name
@@ -6817,6 +6832,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147191714850840681, guid: 201041a6bedf3cf47830adf332963ab5,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.69954336
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147191714850840681, guid: 201041a6bedf3cf47830adf332963ab5,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147191714850840681, guid: 201041a6bedf3cf47830adf332963ab5,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.07843137
       objectReference: {fileID: 0}
     - target: {fileID: 8147191714850840683, guid: 201041a6bedf3cf47830adf332963ab5,
         type: 3}
@@ -16246,6 +16276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  ultimaDesicion: {x: 0, y: 0}
   blink: {fileID: 131117165}
   pinky: {fileID: 1056489107}
   inky: {fileID: 325241649}
@@ -17939,10 +17970,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8147191714850840681, guid: 201041a6bedf3cf47830adf332963ab5,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.23036551
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147191714850840681, guid: 201041a6bedf3cf47830adf332963ab5,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147191714850840681, guid: 201041a6bedf3cf47830adf332963ab5,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.16509432
+      objectReference: {fileID: 0}
     - target: {fileID: 8147191714850840683, guid: 201041a6bedf3cf47830adf332963ab5,
         type: 3}
       propertyPath: m_Name
       value: Blinky
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8147191714850840676, guid: 201041a6bedf3cf47830adf332963ab5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 201041a6bedf3cf47830adf332963ab5, type: 3}

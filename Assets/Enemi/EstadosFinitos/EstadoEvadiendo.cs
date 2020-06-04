@@ -12,9 +12,10 @@ public class EstadoEvadiendo : EstadosFinitos
     [SerializeField]
     private bool puntosLibres = false;
     public float speed;
+    private Color colorOriginal;
     public override void Salir()
     {
-        //throw new System.NotImplementedException();
+        GetComponent<SpriteRenderer>().color = colorOriginal;
     }
 
     public override void Start()
@@ -22,6 +23,10 @@ public class EstadoEvadiendo : EstadosFinitos
         base.Start();
         //aqui tengo que buscar a quien tengo que perseguir
         e.pacman = GameObject.Find("Pacman");
+        //guardamos su color
+        colorOriginal = GetComponent<SpriteRenderer>().color;
+        //le cambiamos el color porque esta huyendo
+        GetComponent<SpriteRenderer>().color = new Color(31, 30, 255);
         pacmen = e.pacman.transform.Find(transform.name).gameObject;
         speed = 1;
         buscarCardinalidadHaciaElObjetivo();
