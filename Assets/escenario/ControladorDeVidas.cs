@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControladorDeVidas : MonoBehaviour
 {
@@ -12,11 +13,34 @@ public class ControladorDeVidas : MonoBehaviour
     void Start()
     {
         //lo que vamos a hacer al inicio es darle 3 vidas al PJ y colocarlas en pantalla
-        vidas = 3;
+        if (PlayerPrefs.HasKey("vidas"))
+        {
+            vidas = PlayerPrefs.GetInt("vidas");
+        }
+        else
+        {
+            vidas = 2;
+        }
         PintarVidas();
+    }
+    private void Update()
+    {
+        if(vidas < 0)
+        {
+            SceneManager.LoadScene("03_Creditos");
+        }
+    }
+    private void DestruirLasVidas()
+    {
+        foreach(GameObject v in vidasCargadas)
+        {
+            Destroy(v);
+        }
+        vidasCargadas = new List<GameObject>();
     }
     private void PintarVidas()
     {
+        DestruirLasVidas();
         for (int i = 1; i <= vidas; i++)
         {
             vidasCargadas.Add(Instantiate(prefabDeVida, (Vector2)transform.position + (Vector2.right * i), prefabDeVida.transform.rotation, transform));
@@ -27,13 +51,20 @@ public class ControladorDeVidas : MonoBehaviour
     {
         Debug.Log("Quito");
         vidas--;
-        //PintarVidas();
+        PintarVidas();
+        GuardarVidas();
     }
 
     public void AgregarVida()
     {
         Debug.Log("Agrego");
         vidas++;
-        //PintarVidas();
+        PintarVidas();
+        GuardarVidas();
+    }
+
+    public void GuardarVidas()
+    {
+        PlayerPrefs.SetInt("vidas", vidas);
     }
 }

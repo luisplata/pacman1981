@@ -14,6 +14,7 @@ public class ControladorDeCreditosScore : MonoBehaviour
     void Start()
     {
         CrearScore();
+        button.SetActive(false);
     }
 
 
@@ -61,6 +62,7 @@ public class ControladorDeCreditosScore : MonoBehaviour
                     nombre.text += sco.nombre + "\n";
                     Debug.Log(sco.nombre + " => " + sco.score);
                     count++;
+                    button.SetActive(true);
                 }
             }
         }
@@ -101,6 +103,6 @@ public class ControladorDeCreditosScore : MonoBehaviour
 
     public void JugarDeNuevo()
     {
-        SceneManager.LoadScene("Pacman");
+        SceneManager.LoadScene("01_Menu");
     }
 }

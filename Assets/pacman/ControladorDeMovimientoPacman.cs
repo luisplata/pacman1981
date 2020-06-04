@@ -4,7 +4,7 @@ public class ControladorDeMovimientoPacman : MonoBehaviour
 {
     public float speed;
     private bool quitarControl = false;
-    private Vector2 ultimaDesicion = Vector2.zero;
+    public Vector2 ultimaDesicion = Vector2.zero;
     /* blink va al centro (0,0)
      * pinky adelante (0,1)
      * inky va a la derecha (1,0)
@@ -68,7 +68,7 @@ public class ControladorDeMovimientoPacman : MonoBehaviour
         //Vamos a hacer correr a pacman hacia la direccion donde tenga la cardinalidad tambien
         Vector2 vector = Vector2.zero;
         //vamos a usar la escala de pacman para posicionarlos
-        float distancia = gameObject.transform.localScale.x * 4;
+        float distancia = gameObject.transform.localScale.x *2;
         switch (cardinalidad)
         {
             case "arriba":
@@ -135,5 +135,10 @@ public class ControladorDeMovimientoPacman : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = vector * (speed + powerup);
             ultimaDesicion = vector;
         }
+    }
+
+    public void DestruirEsteElemento()
+    {
+        Destroy(this);
     }
 }
