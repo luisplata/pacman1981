@@ -56,9 +56,18 @@ public class ControladorScore : MonoBehaviour
             //actualizamos la UI
             scoreGlobal.text = string.Format("{0}", score);
             comio = true;
+            //Colocamos el sonido de comida
+            GameObject controladorDeVolumenTotal = GameObject.Find("ControladorDeVolumenTotal");
+            AudioSource ejecutorDeSonido = controladorDeVolumenTotal.GetComponent<AudioSource>();
+            ejecutorDeSonido.PlayOneShot(controladorDeVolumenTotal.GetComponent<ListaDeSonidosGame>().pacmanCome);
         }
         if (collision.transform.CompareTag("powerup"))
         {
+
+            //Colocamos el sonido de comida
+            GameObject controladorDeVolumenTotal = GameObject.Find("ControladorDeVolumenTotal");
+            AudioSource ejecutorDeSonido = controladorDeVolumenTotal.GetComponent<AudioSource>();
+            ejecutorDeSonido.PlayOneShot(controladorDeVolumenTotal.GetComponent<ListaDeSonidosGame>().pacmanComePowerUp);
             StartCoroutine(PowerUp());
             score +=10;
             //destuimos la comida
@@ -77,10 +86,17 @@ public class ControladorScore : MonoBehaviour
                 collision.gameObject.GetComponent<EstadoEvadiendo>().comidoPorPacman = true;
                 score += 200;
                 scoreGlobal.text = string.Format("{0}", score);
+                //sonido de fantasma muere
+                GameObject controladorDeVolumenTotal = GameObject.Find("ControladorDeVolumenTotal");
+                AudioSource ejecutorDeSonido = controladorDeVolumenTotal.GetComponent<AudioSource>();
+                ejecutorDeSonido.PlayOneShot(controladorDeVolumenTotal.GetComponent<ListaDeSonidosGame>().fantasmaMuere);
             }
             else
             {
                 //porque mato a pacman
+                GameObject controladorDeVolumenTotal = GameObject.Find("ControladorDeVolumenTotal");
+                AudioSource ejecutorDeSonido = controladorDeVolumenTotal.GetComponent<AudioSource>();
+                ejecutorDeSonido.PlayOneShot(controladorDeVolumenTotal.GetComponent<ListaDeSonidosGame>().pacmanMuere);
                 //mandamos a los enemigos al centro
                 estaVivo = false;
                 //demoramos a pacman unos segudos para que aparezca en su ubicacion original
@@ -106,8 +122,21 @@ public class ControladorScore : MonoBehaviour
     }
     IEnumerator PowerUp()
     {
+
+        //Inicia la musica de powerup
+        GameObject controladorDeVolumenTotal = GameObject.Find("ControladorDeVolumenTotal");
+        AudioSource ejecutorDeSonido = controladorDeVolumenTotal.GetComponent<AudioSource>();
+        ejecutorDeSonido.loop = true;
+        ejecutorDeSonido.clip = controladorDeVolumenTotal.GetComponent<ListaDeSonidosGame>().puweUpTime;
+        ejecutorDeSonido.Play();
+        //musica
         gameObject.GetComponent<ControladorDeMovimientoPacman>().powerup = 1;
         yield return new WaitForSeconds(10);
+        //musica
+        ejecutorDeSonido.Stop();
+        ejecutorDeSonido.clip = null;
+        ejecutorDeSonido.loop = false;
+        //musica
         gameObject.GetComponent<ControladorDeMovimientoPacman>().powerup = 0;
     }
     public void JugarDeNuevo()

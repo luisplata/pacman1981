@@ -23,12 +23,23 @@ public class ControladorDeVidas : MonoBehaviour
         }
         PintarVidas();
     }
+    bool entrarUnaVex = true;
     private void Update()
     {
-        if(vidas < 0)
+        if(vidas < 0 && entrarUnaVex)
         {
-            SceneManager.LoadScene("03_Creditos");
+            entrarUnaVex = false;
+            //hacemos una corrutina para darle tiempo al sonido a darse
+            StartCoroutine(FinJuego());
         }
+    }
+    IEnumerator FinJuego()
+    {
+        GameObject controladorDeVolumenTotal = GameObject.Find("ControladorDeVolumenTotal");
+        AudioSource ejecutorDeSonido = controladorDeVolumenTotal.GetComponent<AudioSource>();
+        ejecutorDeSonido.PlayOneShot(controladorDeVolumenTotal.GetComponent<ListaDeSonidosGame>().finDelJuego);
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("03_Creditos");
     }
     private void DestruirLasVidas()
     {
