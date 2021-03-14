@@ -23,7 +23,7 @@ public class ControladorDeCreditosScore : MonoBehaviour
         score.text = "Cargando";
         nombre.text = "...";
         ranking.text = "";
-        StartCoroutine(GetRequest("URI" + "score/best/pacman"));
+        StartCoroutine(GetRequest("https://juegos.peryloth.com/api/" + "score/best/pacman"));
     }
 
     public void RegistrarNombre()
@@ -83,7 +83,7 @@ public class ControladorDeCreditosScore : MonoBehaviour
         }
         form.AddField("score", score);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("URI" + "guardarData/pacman", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("https://juegos.peryloth.com/api/" + "guardarData/pacman", form))
         {
             yield return www.SendWebRequest();
 
