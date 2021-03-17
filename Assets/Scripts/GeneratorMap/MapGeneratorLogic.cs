@@ -25,10 +25,9 @@ public class MapGeneratorLogic
             }
             height--;
         }
-
         DeterminWhatSpriteIsRender(map);
-
         mapGeneratorView.CreateSpritesInGame(map);
+        ServiceLocator.Instance.GetService<IMapGenerator>().SaveMap(map);
     }
 
     private void DeterminWhatSpriteIsRender(Cell[,] map)
@@ -45,18 +44,22 @@ public class MapGeneratorLogic
             {
                 cell.Render = DeterminateRender(map[X, Y], ".", "Point");
             }
-            catch (TypeOfRenderException e)
-            {
-
-            }
+            catch (TypeOfRenderException) { }
             try
             {
                 cell.Render = DeterminateRender(map[X, Y], "^", "Background");
             }
-            catch (TypeOfRenderException e)
+            catch (TypeOfRenderException) { }
+            try
             {
-
+                cell.Render = DeterminateRender(map[X, Y], "v", "Pacman");
             }
+            catch (TypeOfRenderException){ }
+            try
+            {
+                cell.Render = DeterminateRender(map[X, Y], "p", "PowerUp");
+            }
+            catch (TypeOfRenderException) { }
             try
             {
                 cell.Render = DeterminateRender(map[X, Y], "+", "Esquina");
@@ -77,13 +80,10 @@ public class MapGeneratorLogic
                     cell.Render += "Inf";
                 }
             }
-            catch (TypeOfRenderException e)
-            {
-
-            }
+            catch (TypeOfRenderException) { }
             try
             {
-                cell.Render = DeterminateRender(map[X, Y], "|", "Pared");
+                cell.Render = DeterminateRender(map[X, Y], "l", "Pared");
                 if (Y == 0)
                 {
                     cell.Render += "Sup";
@@ -93,10 +93,7 @@ public class MapGeneratorLogic
                     cell.Render += "Inf";
                 }
             }
-            catch (TypeOfRenderException e)
-            {
-
-            }
+            catch (TypeOfRenderException) { }
             try
             {
                 cell.Render = DeterminateRender(map[X, Y], "=", "Pared");
@@ -109,18 +106,7 @@ public class MapGeneratorLogic
                     cell.Render += "Der";
                 }
             }
-            catch (TypeOfRenderException e)
-            {
-
-            }
-            try
-            {
-                cell.Render = DeterminateRender(map[X, Y], "p", "PowerUp");
-            }
-            catch (TypeOfRenderException e)
-            {
-
-            }
+            catch (TypeOfRenderException) { }
 
             try
             {
@@ -134,13 +120,10 @@ public class MapGeneratorLogic
                     cell.Render += "Der";
                 }
             }
-            catch (TypeOfRenderException e)
-            {
-
-            }
+            catch (TypeOfRenderException) { }
             try
             {
-                cell.Render = DeterminateRender(map[X, Y], "º", "ParedDelgadaH");
+                cell.Render = DeterminateRender(map[X, Y], "i", "ParedDelgadaH");
                 if (CheckInPositionIsCaracter(map, X, Y, 0,-1, "."))
                 {
                     cell.Render += "Sup";
@@ -150,10 +133,7 @@ public class MapGeneratorLogic
                     cell.Render += "Inf";
                 }
             }
-            catch (TypeOfRenderException e)
-            {
-
-            }
+            catch (TypeOfRenderException) { }
             try
             {
                 cell.Render = DeterminateRender(map[X, Y], "*", "EsquinaDelgada");
@@ -182,10 +162,7 @@ public class MapGeneratorLogic
                     }
                 }
             }
-            catch (TypeOfRenderException e)
-            {
-
-            }
+            catch (TypeOfRenderException) { }
         }
     }
     private bool CheckInPositionIsCaracter(Cell[,] map, int x, int y, int incrementX, int incrementY, string caracter)

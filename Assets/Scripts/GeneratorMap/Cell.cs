@@ -1,4 +1,6 @@
-﻿public class Cell
+﻿using System;
+
+public class Cell
 {
     public Cell(string name, float weidht, float height, float separacion)
     {
@@ -14,4 +16,5 @@
     public string Name { get; set; }
     public string Type { get; set; }
     public string Render { get; set; }
+    public bool IsTrigger { get; set; }
 }
