@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ControladorDeMovimientoPacman : MonoBehaviour
 {
     public float speed;
     private bool quitarControl = false;
+
     public Vector2 ultimaDesicion = Vector2.zero;
     /* blink va al centro (0,0)
      * pinky adelante (0,1)
@@ -12,16 +14,22 @@ public class ControladorDeMovimientoPacman : MonoBehaviour
      */
     public GameObject blink, pinky, inky, clyde;
     public int powerup;
+    private Vector2 input;
+
+    private void OnMove(InputValue value)
+    {
+        input = value.Get<Vector2>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 cardinalidad = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector2 cardinalidad = input;
         //Debug.Log("X"+Input.GetAxis("Horizontal"));
         //Debug.Log("Y"+Input.GetAxis("Vertical"));
         //acomodamos los objetos que persiguen los fantasmas para que se coloquen en la cardinalidad que corresponde
         //primero miramos quien es mas fuerte x o y
-        if(Mathf.Abs(cardinalidad.x) == Mathf.Abs(cardinalidad.y))
+        if (Mathf.Abs(cardinalidad.x) == Mathf.Abs(cardinalidad.y))
         {
             ColocandoFantasmas("centro");
         }
