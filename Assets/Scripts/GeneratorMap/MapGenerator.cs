@@ -2,13 +2,10 @@
 
 public class MapGenerator : MonoBehaviour, IMapGeneratorView
 {
-    [SerializeField] private GameObject prefabDePunto;
     [SerializeField] private float separacion;
-    [SerializeField] private Sprite spritePixel;
     private MapGeneratorLogic logic;
     [SerializeField] private MapSpritesConfiguration powerUpsConfiguration;
     MapSpritesFactory mapSpritesFactory;
-    public Cell[,] map;
     void Start()
     {
         mapSpritesFactory = new MapSpritesFactory(Instantiate(powerUpsConfiguration));
@@ -17,7 +14,6 @@ public class MapGenerator : MonoBehaviour, IMapGeneratorView
 
     public void CreateSpritesInGame(Cell[,] map)
     {
-        this.map = map;
         var LastX = transform.position.x;
         var LastY = transform.position.y;
         foreach (Cell cell in map)
@@ -29,6 +25,11 @@ public class MapGenerator : MonoBehaviour, IMapGeneratorView
             mapSrite.Config();
             cell.IsTrigger = mapSrite.ColliderIsTrigger();
             mapSrite.Cell = cell;
+            if (cell.Render.Contains("Pacman"))
+            {
+                PacmanOfMap pacman = (PacmanOfMap)mapSrite;
+                pacman.SetInputStrategy(GetComponent<InputStragety>());
+            }
         }
     }
 }

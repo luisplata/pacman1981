@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class ControladorDeMovimientoPacman : MonoBehaviour
 {
@@ -14,17 +13,19 @@ public class ControladorDeMovimientoPacman : MonoBehaviour
      */
     public GameObject blink, pinky, inky, clyde;
     public int powerup;
-    private Vector2 input;
 
-    private void OnMove(InputValue value)
+
+    private IInputAdapter _input;
+
+    private void Start()
     {
-        input = value.Get<Vector2>();
+        _input = GetComponent<InputStragety>().GetInput();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 cardinalidad = input;
+        Vector2 cardinalidad = _input.GetDirection();
         //Debug.Log("X"+Input.GetAxis("Horizontal"));
         //Debug.Log("Y"+Input.GetAxis("Vertical"));
         //acomodamos los objetos que persiguen los fantasmas para que se coloquen en la cardinalidad que corresponde

@@ -10,12 +10,7 @@ public class InicioDeJuego : MonoBehaviour
     {
         PlayerPrefs.DeleteKey("vidas");
         PlayerPrefs.DeleteKey("score");
-#if UNITY_ANDROID
-        SceneManager.LoadScene("021_pacmanMovil");
-#else
-        SceneManager.LoadScene(1);
-        //SceneManager.LoadScene("02_Pacman");
-#endif
+        SceneManager.LoadScene("02_Pacman");
         PlayerPrefs.SetInt("nivel", 1);
     }
 }
