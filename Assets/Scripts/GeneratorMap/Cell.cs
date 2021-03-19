@@ -6,8 +6,8 @@ public class Cell
     {
         Type = name;
         this.Name = name;
-        this.Position = new Position(height * separacion, weidht * separacion);
-        this.PositionInList = new Position(height, weidht);
+        this.Position = new Position(weidht * separacion, height * separacion);
+        this.PositionInList = new Position(weidht, height);
         Render = "";
     }
 
@@ -17,4 +17,5 @@ public class Cell
     public string Type { get; set; }
     public string Render { get; set; }
     public bool IsTrigger { get; set; }
+    public MapSprite Sprite { get; set; }
 }

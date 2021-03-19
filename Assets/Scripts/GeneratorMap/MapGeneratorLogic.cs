@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 
 public class MapGeneratorLogic
 {
@@ -12,8 +13,8 @@ public class MapGeneratorLogic
     {
         this.mapGeneratorView = mapGeneratorView;
         var file = ReadFile(@"Assets/Resources/map.csv");
-        map = new Cell[file.Count, file[0].Length];
-        height = file.Count - 1;
+        map = new Cell[file[0].Length, file.Count];
+        height = 0;
         foreach (string[] s in file)
         {
             weidht = 0;
@@ -23,7 +24,7 @@ public class MapGeneratorLogic
                 map[height, weidht].Name += "_" + height + "_" + weidht;
                 weidht++;
             }
-            height--;
+            height++;
         }
         DeterminWhatSpriteIsRender(map);
         mapGeneratorView.CreateSpritesInGame(map);
@@ -186,7 +187,7 @@ public class MapGeneratorLogic
         List<string[]> result = new List<string[]>();
         StreamReader file = new StreamReader(path);
         while ((line = file.ReadLine()) != null)
-        {
+        { 
             result.Add(line.Split(' '));
         }
         file.Close();

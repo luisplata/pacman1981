@@ -25,6 +25,7 @@ public class MapGenerator : MonoBehaviour, IMapGeneratorView
             mapSrite.Config();
             cell.IsTrigger = mapSrite.ColliderIsTrigger();
             mapSrite.Cell = cell;
+            cell.Sprite = mapSrite;
             if (cell.Render.Contains("Pacman"))
             {
                 PacmanOfMap pacman = (PacmanOfMap)mapSrite;

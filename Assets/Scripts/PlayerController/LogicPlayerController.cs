@@ -8,6 +8,7 @@ public class LogicPlayerController
     private float stepSize = 1;
     private float walkSpeed = 2;
     private bool canMove = true;
+    Cell[,] map;
     private enum Direction
     {
         North,//0
@@ -35,11 +36,12 @@ public class LogicPlayerController
     public LogicPlayerController(IPlayerControllerView playerControllerView, Vector2 nextPosition, float stepSize, float walkSpeed)
     {
         this.playerControllerView = playerControllerView;
-        direction = Vector2.zero;
+        direction = Vector3.zero;
         NextPosition = nextPosition;
         this.stepSize = stepSize;
         this.walkSpeed = walkSpeed;
         playerControllerView.Configure();
+        map = ServiceLocator.Instance.GetService<IMapGenerator>().GetMap();
     }
 
     public void AddDirection(Vector3 position)
@@ -48,7 +50,18 @@ public class LogicPlayerController
         {
             return;
         }
-        NextPosition += stepSize * direction;
+        Position p = playerControllerView.GetPositionPacmanInTheMap();
+        Cell cell = map[(int)p.X, (int)p.Y];
+        Cell nextCell = map[(int)(p.X + direction.x) , (int)(p.Y + (direction.y))];
+        if (!nextCell.IsTrigger)
+        {
+            return;
+        }
+        p.AddX(direction.x);
+        p.AddY(direction.y);
+        cell = map[(int)p.X, (int)p.Y];
+        
+        NextPosition = cell.Sprite.transform.position;
     }
 
     public bool CheckMovement(Vector3 input)
@@ -66,6 +79,12 @@ public class LogicPlayerController
 
     private Vector3 InputToDirectionVector3(Vector2 input)
     {
+        
+        return directionList[(int)ConvertInputValueToDirectionEnum(input)];
+    }
+
+    private Direction ConvertInputValueToDirectionEnum(Vector2 input)
+    {
         Direction direction;
         if (input != Vector2.zero)
         {
@@ -82,7 +101,7 @@ public class LogicPlayerController
             }
             else
             {
-                if (input.y > 0)
+                if (input.y < 0)
                 {
                     direction = Direction.North;
                 }
@@ -96,7 +115,7 @@ public class LogicPlayerController
         {
             direction = Direction.None;
         }
-        return directionList[(int)direction];
+        return direction;
     }
 
     public bool IsMoving(Vector3 position)

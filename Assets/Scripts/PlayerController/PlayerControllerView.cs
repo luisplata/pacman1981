@@ -8,9 +8,11 @@ public class PlayerControllerView : MonoBehaviour, IPlayerControllerView
     float walkSpeed = 2;
     private LogicPlayerController logic;
     private IInputAdapter _input;
+    private PacmanOfMap pacman;
 
     private void Start()
     {
+        pacman = GetComponent<PacmanOfMap>();
         logic = new LogicPlayerController(this, transform.position, stepSize, walkSpeed);
     }
 
@@ -35,4 +37,11 @@ public class PlayerControllerView : MonoBehaviour, IPlayerControllerView
     {
         return Time.deltaTime;
     }
+
+    public Position GetPositionPacmanInTheMap()
+    {
+        return pacman.Cell.PositionInList;
+    }
+
+    
 }
