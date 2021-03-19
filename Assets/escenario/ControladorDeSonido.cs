@@ -10,6 +10,7 @@ public class ControladorDeSonido : MonoBehaviour
 
     private void Start()
     {
+        Screen.orientation = ScreenOrientation.Landscape;
         if (PlayerPrefs.HasKey("volumenGeneral"))
         {
             slider.value = PlayerPrefs.GetFloat("volumenGeneral");
